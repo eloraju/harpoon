@@ -224,7 +224,10 @@ function HarpoonList:get(index)
     return self.items[index]
 end
 
+---@param value? HarpoonItem
+---@return HarpoonItem | nil, integer | nil
 function HarpoonList:get_by_value(value)
+    value = value or self.config.create_list_item(self.config)
     local index = index_of(self.items, self._length, value, {
         equals = function(element, item)
             if item == nil then
