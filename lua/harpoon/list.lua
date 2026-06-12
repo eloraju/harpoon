@@ -224,7 +224,7 @@ function HarpoonList:get(index)
     return self.items[index]
 end
 
----@param value? HarpoonItem
+---@param value HarpoonItem
 ---@return HarpoonItem | nil, integer | nil
 function HarpoonList:get_by_value(value)
     value = value or self.config.create_list_item(self.config)
@@ -240,6 +240,19 @@ function HarpoonList:get_by_value(value)
         return nil
     end
     return self.items[index], index
+end
+
+---@param item? HarpoonItem
+---@return HarpoonItem | nil
+function HarpoonList:get_item(item)
+    item = item or self.config.create_list_item(self.config)
+    local found = self:get_by_value(item)
+
+    if not found then
+        return nil
+    end
+
+    return found
 end
 
 --- much inefficiencies.  dun care
